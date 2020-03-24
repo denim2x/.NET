@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SelfReference" targetNamespace="http://tempuri.org/SelfReference.xsd" xmlns:mstns="http://tempuri.org/SelfReference.xsd" xmlns="http://tempuri.org/SelfReference.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SelfReference" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SelfReference" msprop:Generator_UserDSName="SelfReference">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SelfReference" msprop:Generator_TableClassName="SelfReferenceDataTable" msprop:Generator_TableVarName="tableSelfReference" msprop:Generator_TablePropName="_SelfReference" msprop:Generator_RowDeletingName="SelfReferenceRowDeleting" msprop:Generator_RowChangingName="SelfReferenceRowChanging" msprop:Generator_RowEvHandlerName="SelfReferenceRowChangeEventHandler" msprop:Generator_RowDeletedName="SelfReferenceRowDeleted" msprop:Generator_UserTableName="SelfReference" msprop:Generator_RowChangedName="SelfReferenceRowChanged" msprop:Generator_RowEvArgName="SelfReferenceRowChangeEvent" msprop:Generator_RowClassName="SelfReferenceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SelfReferenceId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnSelfReferenceId" msprop:Generator_ColumnPropNameInRow="SelfReferenceId" msprop:Generator_ColumnPropNameInTable="SelfReferenceIdColumn" msprop:Generator_UserColumnName="SelfReferenceId" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="ParentSelfReferenceId" msprop:Generator_ColumnVarNameInTable="columnParentSelfReferenceId" msprop:Generator_ColumnPropNameInRow="ParentSelfReferenceId" msprop:Generator_ColumnPropNameInTable="ParentSelfReferenceIdColumn" msprop:Generator_UserColumnName="ParentSelfReferenceId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:SelfReference" />
+      <xs:field xpath="mstns:SelfReferenceId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
