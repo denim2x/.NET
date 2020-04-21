@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="Model1.Person" />
+          <EntitySet Name="Media" EntityType="Model1.Media" />
+          <EntitySet Name="AttributeValues" EntityType="Model1.AttributeValue" />
+          <AssociationSet Name="MediaAttribute" Association="Model1.MediaAttribute">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Attribute" EntitySet="AttributeValues" />
+          </AssociationSet>
+          <EntitySet Name="Attributes" EntityType="Model1.Attribute" />
+          <AssociationSet Name="AttributeAttributeValue" Association="Model1.AttributeAttributeValue">
+            <End Role="Attribute" EntitySet="Attributes" />
+            <End Role="AttributeValue" EntitySet="AttributeValues" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="10" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="10" />
+          <Property Name="TelephoneNumber" Type="String" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Media" Abstract="false">
+          <Documentation>
+            <Summary>Abstract entity type for media objects</Summary>
+            <LongDescription>This is the abstract base class for modeling a generic media object, having an arbitrary number of attributes and a flag named 'deleted' for marking a media object as 'deleted'.</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <NavigationProperty Name="Attributes" Relationship="Model1.MediaAttribute" FromRole="Media" ToRole="Attribute" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributeValue">
+          <Documentation>
+            <Summary>Concrete entity type for attributes</Summary>
+            <LongDescription>This is the concrete entity type for modeling attributes on media objects; every attribute instance has a name, an (optional) value, an (optional) type and a reference to the media instance it describes.</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttributeId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="true" />
+          <NavigationProperty Name="Media" Relationship="Model1.MediaAttribute" FromRole="Attribute" ToRole="Media" />
+          <Property Name="MediaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attribute" Relationship="Model1.AttributeAttributeValue" FromRole="AttributeValue" ToRole="Attribute" />
+        </EntityType>
+        <Association Name="MediaAttribute">
+          <End Type="Model1.Media" Role="Media" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.AttributeValue" Role="Attribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attribute">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="AttributeType">
+          <Member Name="String" />
+          <Member Name="Number" />
+          <Member Name="Date" />
+          <Member Name="Person" />
+          <Member Name="Location" />
+          <Member Name="Path" />
+          <Member Name="TimeStamp" />
+        </EnumType>
+        <EntityType Name="Attribute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Type" Type="Model1.AttributeType" Nullable="false" />
+          <NavigationProperty Name="Values" Relationship="Model1.AttributeAttributeValue" FromRole="Attribute" ToRole="AttributeValue" />
+        </EntityType>
+        <Association Name="AttributeAttributeValue">
+          <End Type="Model1.Attribute" Role="Attribute" Multiplicity="1" />
+          <End Type="Model1.AttributeValue" Role="AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="AttributeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
