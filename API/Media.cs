@@ -30,9 +30,12 @@ namespace MyPhotos {
     }
 
     public static int DeleteMedia(this int id) {
-      using (var ctx = new MyPhotosContainer()) {
-        return ctx.Database.ExecuteSqlCommand("Delete From Media where Id = @p0", id);
+      var media = id.GetMediaById();
+      if (media != null) {
+        media.Deleted = true;
+        return id;
       }
+      return 0;
     }
 
     public static Media GetMediaById(this int id) {
