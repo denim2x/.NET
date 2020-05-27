@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = "Home page";
+}
+
+<h1>Index</h1>
+@using (Html.BeginForm()) {
+  <p>Filter media items by:</p>
+  <label>Attribute: @Html.TextBox("Attribute")</label>
+  <label>Value: @Html.TextBox("Value")</label>
+  <input type="submit" value="Apply" />
+}
+<p>Total media items: <span>@Html.DisplayFor(model => model.Media.Count)</span></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>@Html.DisplayNameFor(model => model.Media[0].Id)</th>
+      <th>@Html.DisplayNameFor(model => model.Media[0].Deleted)</th>
+      <th>@Html.DisplayNameFor(model => model.Media[0].Attributes)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model.Media) {
+      <tr style="font-size:small">
+        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+        <td>@Html.DisplayFor(modelItem => item.Deleted)</td>
+        <td>@Html.DisplayFor(modelItem => item.Attributes.Count)</td>
+        <td>
+          <a asp-page="./Media/Edit" asp-route-id="@item.Id">Edit</a>|
+          <a asp-page="/Attributes/List" asp-route-id="@item.Id">Details</a>|
+          <a asp-page="./Media/Delete" asp-route-id="@item.Id">Delete</a>|
+          <a asp-page="/Attributes/Create" asp-route-id="@item.Id">Add an Attribute</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

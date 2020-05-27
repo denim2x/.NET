@@ -15,7 +15,6 @@ namespace MyPhotos {
   [DataContract(IsReference = true)]
   public partial class Attribute {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    [DataMember]
     public Attribute() {
       this.Values = new HashSet<AttributeValue>();
     }

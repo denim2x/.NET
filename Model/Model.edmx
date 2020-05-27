@@ -12,7 +12,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MyPhotosContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="People" EntityType="Model1.Person" />
           <EntitySet Name="Media" EntityType="Model1.Media" />
           <EntitySet Name="AttributeValues" EntityType="Model1.AttributeValue" />
@@ -114,7 +114,7 @@
       <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
         <Alias Key="Model" Value="Model1" />
         <Alias Key="Target" Value="Model1.Store" />
-        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        <EntityContainerMapping CdmEntityContainer="MyPhotosContainer" StorageEntityContainer="Model1TargetContainer">
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
